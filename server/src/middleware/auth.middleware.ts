@@ -16,7 +16,7 @@ const authenticateJWT = async (req: Request, res: Response, next: NextFunction):
 
     if (!token) {
         res.status(403).json({ error: 'Access Denied. No token provided.' });
-        return
+        return;
     }
 
     try {
@@ -25,7 +25,7 @@ const authenticateJWT = async (req: Request, res: Response, next: NextFunction):
         next();
     } catch (err) {
         res.status(403).json({ error: 'Invalid or expired token.', err });
-        return 
+        return; 
     }
 }
 

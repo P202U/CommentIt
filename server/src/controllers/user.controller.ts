@@ -11,7 +11,7 @@ if (!JWT_SECRET) {
 
 const registerUser = async (req: Request, res: Response): Promise<void> => {
   const hashPassword = async (password: string) => {
-    return await argon2.hash(password);
+    return argon2.hash(password);
   };
 
   const { username, email, password } = req.body;
@@ -52,11 +52,11 @@ const registerUser = async (req: Request, res: Response): Promise<void> => {
         email: newUser.email,
       },
     });
-    return
+    return;
   } catch (error) {
     console.error(error);
     res.status(500).json({ error: 'Error registering user' });
-    return
+    return;
   }
 };
 
@@ -89,14 +89,14 @@ const loginUser = async (req: Request, res: Response): Promise<void> => {
         { expiresIn: '1h' }
       );
       res.json({ message: 'Login successful', user: user, token: token });
-      return
+      return;
     } else {
       res.status(401).json({ error: 'Invalid email/username or password.' });
-      return
+      return;
     }
   } catch {
     res.status(500).json({ error: 'Error logging in user' });
-    return
+    return;
   }
 }
 
