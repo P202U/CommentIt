@@ -13,6 +13,7 @@
     "paths": {
       "@controllers/*": ["controllers/*"],
       "@routes/*": ["routes/*"],
+      "@middleware/*": ["middleware/*"],
       "@prismaClient": ["prismaClient.ts"]
     }
   },

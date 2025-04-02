@@ -1,32 +1,54 @@
+import { useState } from 'react';
+import { ThemeProvider, CssBaseline, IconButton } from '@mui/material';
+import { lightTheme, darkTheme } from './theme';
+import { Brightness7, Brightness4 } from '@mui/icons-material';
 import './index.css';
-import AccessAlarmIcon from '@mui/icons-material/AccessAlarm';
-import ThreeDRotation from '@mui/icons-material/ThreeDRotation';
-import { pink } from '@mui/material/colors';
 
 function App() {
+  // State to manage the theme (light or dark)
+  const [isDarkMode, setIsDarkMode] = useState(false);
+
+  // Toggle the theme
+  const toggleTheme = () => {
+    setIsDarkMode(prev => !prev);
+  };
+
   return (
-    <div>
-      <div className="text-2xl font-bold text-amber-500">Hello world!</div>
-      <div>
-        <AccessAlarmIcon />
-      </div>
-      <div>
-        <ThreeDRotation
+    <ThemeProvider theme={isDarkMode ? darkTheme : lightTheme}>
+      <CssBaseline /> {/* Ensures MUI components use the theme */}
+      <div
+        style={{
+          minHeight: '100vh',
+          display: 'flex',
+          justifyContent: 'center',
+          alignItems: 'center',
+          flexDirection: 'column',
+        }}
+      >
+        {/* The toggle button with icon */}
+        <IconButton
+          onClick={toggleTheme}
           sx={{
-            color: pink[500],
-            fontSize: 40,
-            marginTop: 3,
-            border: '2px solid black',
-            borderRadius: '50%',
-            boxShadow: 3,
-            '&:hover': {
-              color: 'purple', // Change color on hover
-              transform: 'scale(1.2)', // Enlarge icon on hover
-            },
+            position: 'absolute',
+            top: 20,
+            right: 20,
+            backgroundColor: 'transparent',
           }}
-        />
+        >
+          {/* Toggle the icons based on the current theme */}
+          {isDarkMode ? <Brightness7 /> : <Brightness4 />}
+        </IconButton>
+
+        <h1 style={{ color: 'text.primary' }}>
+          {isDarkMode ? 'Dark Mode' : 'Light Mode'}
+        </h1>
+
+        {/* Additional content */}
+        <p style={{ color: 'text.primary' }}>
+          The current theme is {isDarkMode ? 'dark' : 'light'} mode.
+        </p>
       </div>
-    </div>
+    </ThemeProvider>
   );
 }
 
