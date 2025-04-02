@@ -11,7 +11,7 @@ const getPosts = async (_req: Request, res: Response): Promise<void> => {
         content: true,
         _count: {
           select: {
-            comments: true, // This will give you the count of comments for each post
+            comments: true,
           },
         },
         createdAt: true,
